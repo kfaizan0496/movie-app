@@ -2,6 +2,7 @@ import React from 'react';
  import {data} from '../data'
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
+import {addMovies} from '../actions';
 
 
 
@@ -15,21 +16,18 @@ class  App extends React.Component{
     console.log("UPDATING");
     this.forceUpdate();
   })
-store.dispatch({
-  type:'ADD_MOVIES',
-  movies:data
-}
+store.dispatch(addMovies(data));
 //
 
-)
+
 console.log('state',store.getState());
 
 
   }
 
  render(){
-  console.log("render");
-    const  movies  = this.props.store.getState();
+  console.log("render",this.props.store.getState());
+    const  {list}  = this.props.store.getState();// getState return obj {list:[],favourites:[]}
     return (
       <div className="App">
 
@@ -42,7 +40,7 @@ console.log('state',store.getState());
 
           </div>
           <div className='list' >
-            {movies.map((movie, index) => {
+            {list.map((movie, index) => {
 
               return <MovieCard movie={movie} key={`movies-${index}`} />
             })}
