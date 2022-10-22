@@ -49,8 +49,11 @@
       }
  }
 
- export function handleMovieSearch(movie){
-  const url=`http://www.omdbapi.com/?apikey=6440a370&t=${movie}`;
+ export function handleMovieSearch(title){
+  console.log(title);
+  const url=`http://www.omdbapi.com/?apikey=6440a370&t=${title}`;
+
+//  http://www.omdbapi.com/?i=tt3896198&apikey=6440a370
   return function(dispatch){
   fetch(url)
    .then(response=> response.json())

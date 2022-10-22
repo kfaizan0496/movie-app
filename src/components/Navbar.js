@@ -1,6 +1,9 @@
 import React from 'react';
-import {data} from '../data';
+// import {data} from '../data';
 import {addMovieToList,handleMovieSearch} from '../actions';
+// import {connect} from '../index'
+import {connect}  from 'react-redux';
+
 
 
 
@@ -29,7 +32,7 @@ class Navbar extends React.Component {
     handleChange=(e)=>{
         this.setState(
             {
-            searchText:e.target.val
+            searchText:e.target.value // realtime update of input text
         }
             )
         
@@ -40,6 +43,7 @@ class Navbar extends React.Component {
 
     render() {
         // const{showSearchResults}=this.state;
+      
         const {result,showSearchResults}=this.props.search;
         return (
 
@@ -92,4 +96,33 @@ class Navbar extends React.Component {
 
 }
 
-export default Navbar;
+
+// class NavbarWrapper extends React.Component{
+//     render(){
+//       return(
+//     <StoreContext.Consumer>
+//        {(store)=>{
+//           return <Navbar dispatch={store.dispatch} search={this.props.search}/>
+//        }
+//     }
+//      </StoreContext.Consumer>
+//       )
+//     }
+//   }
+// function mapStateToProps(state){
+//     return{
+//       movies:state.movies,
+//       search:state.search,
+//     }
+//   }
+//   const connectedNavbarComponent=connect(mapStateToProps)(Navbar);
+//   export default connectedNavbarComponent;
+
+      //   OR OR OR
+
+  function mapStateToProps({search}){  //destructure search in curly braces
+    return{
+     search  // use Shortend property
+    }
+  }
+  export default connect(mapStateToProps)(Navbar);
